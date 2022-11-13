@@ -1,0 +1,38 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    #开启发送失败返回
+    publisher-returns: true
+    template:
+      mandatory: true
+    publisher-confirm-type: simple
+judge:
+  sensitive-key: fork,system,popen,exec,<sys/ptrace.h>,<sys/wait.h>,<sys/time.h>,Runtime,Popen,subprocess,getstatusoutput,getoutput,pbs,apt-get
+  scriptPath: /home/judge/judge
+  judgePath: /home/judge/tmp
+  download: wget http://127.0.0.1/test?password=123&problemId={ProId} -O PATH/main.zip
+  # GCC
+  GNUC: gcc -lm -w -O3 -std=gnu11 PATH/main.c -o PATH/main
+  Crun: PATH/main
+  # G++
+  GNUCPP: g++ -lm -w -O3 -std=gnu++2a PATH/main.cpp -o PATH/main
+  # java compiler
+  Javaword: javac PATH/Main.java
+  Javarun: java -classpath PATH Main
+  # python compiler
+  Python2word: python2 -m py_compile PATH/main.py
+  Python3word: python3 -m py_compile PATH/main.py
+  Python2run: python2 PATH/main.py
+  Python3run: python3 PATH/main.py
+  # C# compiler
+  MonoWord: mcs PATH/main.cs
+  MonoRun: mono PATH/main.exe
+  # go compiler
+  GoWord: cd PATH && go build
+  GoRun: PATH/main
+  # ruby compiler
+  RubyWord: ruby -c PATH/main.rb
+  RubyRun: ruby PATH/main.rb

@@ -1,0 +1,54 @@
+server:
+  port: 8000
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    publisher-returns: true
+    template:
+      mandatory: true
+    publisher-confirm-type: simple
+  application:
+    name: acm
+  profiles:
+    active: develop
+  redis:
+    timeout: 10000
+    host: localhost
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 1000
+        max-idle: 10
+        min-idle: 5
+        max-wait: -1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/acm?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 521545
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      max-active: 300
+      max-wait: 60000
+      initial-size: 6
+mybatis-plus:
+  configuration:
+    cache-enabled: true
+  global-config:
+    db-config:
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
